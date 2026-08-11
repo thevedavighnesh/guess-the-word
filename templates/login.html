@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Log in – Guess the Word{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <h1>Log in</h1>
+  <form method="POST" action="{{ url_for('auth.login') }}">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" value="{{ username }}" required autofocus>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="submit" class="btn">Log in</button>
+  </form>
+  <p class="auth-switch">No account yet? <a href="{{ url_for('auth.register') }}">Register</a></p>
+</div>
+{% endblock %}

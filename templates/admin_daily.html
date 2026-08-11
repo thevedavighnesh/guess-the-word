@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Daily report – Guess the Word{% endblock %}
+{% block content %}
+<div class="admin-wrap">
+  <p><a href="{{ url_for('admin.dashboard') }}">&larr; Back to dashboard</a></p>
+  <h1>Daily report</h1>
+
+  <form method="GET" action="{{ url_for('admin.daily_report') }}" class="inline-form">
+    <label for="date">Date</label>
+    <input type="date" id="date" name="date" value="{{ report_date.isoformat() }}">
+    <button type="submit" class="btn">View</button>
+  </form>
+
+  <table class="report-table">
+    <tbody>
+      <tr><th>Date</th><td>{{ report_date.isoformat() }}</td></tr>
+      <tr><th>Games played</th><td>{{ num_games }}</td></tr>
+      <tr><th>Distinct users who played</th><td>{{ num_users }}</td></tr>
+      <tr><th>Correct guesses (wins)</th><td>{{ num_correct }}</td></tr>
+    </tbody>
+  </table>
+</div>
+{% endblock %}

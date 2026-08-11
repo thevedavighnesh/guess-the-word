@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Play – Guess the Word{% endblock %}
+{% block content %}
+<div class="game-wrap">
+  <h1>Guess the 5-letter word</h1>
+  <p class="sub">Games played today: {{ games_today }} / {{ max_per_day }}</p>
+
+  {% if not game %}
+    {% if can_start_new %}
+      <form method="POST" action="{{ url_for('game.start') }}">
+        <button type="submit" class="btn">Start new game</button>
+      </form>
+    {% else %}
+      <p class="notice">You've used all {{ max_per_day }} of today's games. Come back tomorrow!</p>
+    {% endif %}
+  {% else %}
+    <div id="grid" class="grid"></div>
+
+    <form id="guess-form" class="guess-form" autocomplete="off">
+      <input
+        type="text"
+        id="guess-input"
+        maxlength="{{ game.word_length }}"
+        pattern="[A-Za-z]{5}"
+        placeholder="TRAIN"
+        {% if game.status != 'in_progress' %}disabled{% endif %}
+      >
+      <button type="submit" class="btn" {% if game.status != 'in_progress' %}disabled{% endif %}>Guess</button>
+    </form>
+    <p id="error-msg" class="notice error-msg"></p>
+
+    {% if game.status == 'in_progress' %}
+      <p class="hint">Green = right letter, right spot. Orange = right letter, wrong spot. Grey = not in the word.</p>
+    {% endif %}
+  {% endif %}
+</div>
+
+<div id="result-modal" class="modal-overlay hidden">
+  <div class="modal">
+    <h2 id="modal-title"></h2>
+    <p id="modal-text"></p>
+    <button id="modal-ok" class="btn">OK</button>
+  </div>
+</div>
+
+{% if game %}
+<script>
+  window.INITIAL_GAME = {{ game | tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/game.js') }}"></script>
+{% endif %}
+{% endblock %}

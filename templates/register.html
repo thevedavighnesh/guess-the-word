@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Register – Guess the Word{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <h1>Create an account</h1>
+  <form method="POST" action="{{ url_for('auth.register') }}">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" value="{{ username }}" required autofocus>
+    <p class="hint">At least 5 characters, with both an uppercase and a lowercase letter.</p>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+    <p class="hint">At least 5 characters, with a letter, a number, and one of $ % * !</p>
+
+    <label for="confirm_password">Confirm password</label>
+    <input type="password" id="confirm_password" name="confirm_password" required>
+
+    <button type="submit" class="btn">Register</button>
+  </form>
+  <p class="auth-switch">Already have an account? <a href="{{ url_for('auth.login') }}">Log in</a></p>
+</div>
+{% endblock %}
