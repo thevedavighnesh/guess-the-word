@@ -9,11 +9,11 @@ A 5-letter word guessing game (Wordle-style), built with Flask. Two roles:
 ```bash
 cd guess_the_word
 python3 -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
+source .venv/bin/activate        
 pip install -r requirements.txt
 
-python seed_data.py              # creates DB, seeds 20 words + a default admin
-python app.py                    # runs at http://localhost:5000
+python seed_data.py              
+python app.py                    
 ```
 
 Default admin account created by `seed_data.py`:
@@ -32,7 +32,7 @@ Default admin account created by `seed_data.py`:
     a lowercase letter (letters/digits/underscore only).
   - Password: at least 5 characters, with at least one letter, one digit,
     and one of `$ % * !`. *(The spec's list of special characters was cut
-    off after `$, %, *, and)` — I filled the fourth character in with `!`;
+    off after `$, %, *, @, !`;
     this is easy to change in `auth/validators.py` if a different set was
     intended.)*
 - **20 seed words** — `seed_data.py` loads 20 upper-case 5-letter English

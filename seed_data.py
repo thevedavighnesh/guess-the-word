@@ -1,9 +1,3 @@
-"""
-Run this once to set up the database with the 20 starter words and a
-default admin account.
-
-    python seed_data.py
-"""
 from app import create_app
 from extensions import db
 from models import Word, User

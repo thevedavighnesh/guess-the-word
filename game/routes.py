@@ -27,7 +27,7 @@ def _serialize_game(game):
             }
             for g in game.guesses
         ],
-        # Only reveal the answer once the game has ended.
+        
         "answer": game.word.text if game.status != "in_progress" else None,
     }
 
